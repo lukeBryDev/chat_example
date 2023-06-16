@@ -17,11 +17,17 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   final TextEditingController _txtCtrl = TextEditingController();
 
-  final _focusNode = FocusNode();
+  late FocusNode _focusNode;
 
   final List<ChatMessage> _messages = [];
 
   bool writing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +88,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
               child: TextField(
                 controller: _txtCtrl,
                 focusNode: _focusNode,
+                autofocus: true,
                 onChanged: (v) {
                   setState(() {
                     writing = (v.trim().isNotEmpty);
@@ -95,7 +102,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
               margin: const EdgeInsets.symmetric(horizontal: 4),
               child: Platform.isIOS
                   ? CupertinoButton(
-                      onPressed: _handleSubmit,
+                      onPressed: !writing ? null : _handleSubmit,
                       child: const Text('Send'),
                     )
                   : Container(
@@ -106,7 +113,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                           highlightColor: Colors.transparent,
                           splashColor: Colors.transparent,
                           icon: const Icon(Icons.send),
-                          onPressed: _handleSubmit,
+                          onPressed: !writing ? null : _handleSubmit,
                         ),
                       ),
                     ),
@@ -118,8 +125,8 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   }
 
   Future<void> _handleSubmit() async {
-    if (writing) return;
-    _txtCtrl.clear();
+    if (!writing) return;
+    log(_txtCtrl.text, name: 'message');
     _focusNode.requestFocus();
     final newMessage = ChatMessage(
       message: _txtCtrl.text,
@@ -131,10 +138,10 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     );
     _messages.insert(0, newMessage);
     newMessage.animationController.forward();
+    _txtCtrl.clear();
     setState(() {
       writing = false;
     });
-    log(_txtCtrl.text, name: 'message');
   }
 
   @override
@@ -144,6 +151,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     for (ChatMessage message in _messages) {
       message.animationController.dispose();
     }
+    _focusNode.dispose();
     super.dispose();
   }
 }

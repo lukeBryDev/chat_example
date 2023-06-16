@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SignUpPage extends StatelessWidget {
-  static const routeName = 'RegisterPage';
+  static const routeName = '/SignUpPage';
 
   const SignUpPage({Key? key}) : super(key: key);
 

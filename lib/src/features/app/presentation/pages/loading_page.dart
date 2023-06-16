@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoadingPage extends StatelessWidget {
-  static const routeName = 'LoadingPage';
+  static const routeName = '/LoadingPage';
 
   const LoadingPage({Key? key}) : super(key: key);
 

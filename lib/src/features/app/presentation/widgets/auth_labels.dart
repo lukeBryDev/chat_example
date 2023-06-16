@@ -1,5 +1,5 @@
 import 'package:chat/src/features/app/presentation/pages/login_page/pages/login_page.dart';
-import 'package:chat/src/features/app/presentation/pages/sign_up_page/pages/sign_up_page.dart';
+import 'package:chat/src/features/app/presentation/pages/sign_up/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 class AuthLabels extends StatelessWidget {

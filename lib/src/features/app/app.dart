@@ -1,9 +1,6 @@
 import 'package:chat/routes/routes.dart';
-import 'package:chat/src/features/app/presentation/pages/chat_page.dart';
-import 'package:chat/src/features/app/presentation/pages/loading_page.dart';
-import 'package:chat/src/features/app/presentation/pages/login_page/pages/login_page.dart';
+import 'package:chat/src/features/app/presentation/pages/chat/pages/chat_page.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -14,7 +11,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Chat Demo',
       theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-      initialRoute: LoginPage.routeName,
+      initialRoute: ChatPage.routeName,
       routes: appRoutes,
     );
   }

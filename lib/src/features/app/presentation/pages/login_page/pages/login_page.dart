@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class LoginPage extends StatelessWidget {
-  static const routeName = 'LoginPage';
+  static const routeName = '/LoginPage';
 
   const LoginPage({Key? key}) : super(key: key);
 
